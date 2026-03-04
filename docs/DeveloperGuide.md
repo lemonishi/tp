@@ -290,11 +290,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
 | `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
+| `* * *`  | small business owner                                       | add a new customers             | keep track of deliveries                                                                       |
 | `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
+| `* * *`  | driver with limited road experience        | get quick directions to my next location | complete my orders as soon as possible                        |
+| `* * *`  | small business owner                       | import and export customers and order details | avoid retyping existing data                                |
+| `* * *`  | delivery driver                            | mark a delivery as succeeded/failed | handle order updates while on the road                          |
+| `* * *`  | new business owner                         | access the app with a password | protect client confidentiality and trust                              |
+| `* * *`  | beginner user                              | access a help page of commands (user guide) | know what each command does and how to use them               |
 | `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| `* *`    | small business owner                       | group customers staying in the same block/estate/area | complete all deliveries in that area without revisiting |
+| `* *`    | delivery driver                            | log the reason for a failed delivery (e.g., "No answer", "Wrong address") | avoid repeating the same mistakes |
+| `* *`    | small business owner who prefers commands over a graphical interface | generate a route grouped by location using a single command | minimize repeated trips easily |
+| `* *`    | CLI-lover                                  | use keyboard commands as much as possible | reduce time wasted navigating with a mouse                         |
+| `* *`    | small business owner                       | highlight blatantly erroneous entries | reduce administrative workload (data checking)                    |
+| `* *`      | user with many persons in the address book | sort persons by name or address        | locate a person easily                                                 |
+| `*`      | long-time user                             | delete specific addresses (subscribers) | keep subscribers viewable while removing non-subscribers        |
+| `*`      | long-time user                             | view a decent-looking UI     | make everyday usage less mundane while keeping information viewable    |
 
 *{More to be added}*
 
