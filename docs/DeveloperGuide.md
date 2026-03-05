@@ -300,32 +300,114 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Client2Door` and the **Actor** is the `Startup Owner`, unless specified otherwise)
 
-**Use case: Delete a person**
+---
+
+**Use case: UC01 — Add a subscriber**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  Startup owner requests to add a subscriber.
+2.  Client2Door adds the subscriber to the active subscriber list.
+3.  Client2Door displays a success message and updated subscriber list.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Startup owner enters an invalid command word (e.g., typo, misspelling).
 
-  Use case ends.
+    * 1a1. Client2Door shows an error message indicating the command is invalid.
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+* 1b. Startup owner enters an invalid command format (e.g., parameters issue).
 
-      Use case resumes at step 2.
+    * 1b1. Client2Door shows an error message indicating the format is invalid.
 
-*{More to be added}*
+      Use case ends.
+
+* 1c. Startup owner enters an invalid phone number (e.g., incorrect number of digits).
+
+    * 1c1. Client2Door shows invalid phone number error message.
+
+      Use case ends.
+
+* 1d. Startup owner enters an invalid email address.
+
+    * 1d1. Client2Door shows invalid email error message.
+
+      Use case ends.
+
+* 1e. Startup owner enters an invalid postal code.
+
+    * 1e1. Client2Door shows invalid postal code error message.
+
+      Use case ends.
+
+* 1f. Startup owner adds a duplicate subscriber.
+
+    * 1f1. Client2Door shows duplicate subscriber error message.
+
+      Use case ends.
+
+---
+
+**Use case: UC02 — Delete a subscriber**
+
+**MSS**
+
+1.  Startup owner requests to delete a subscriber at specific index in list.
+2.  Client2Door deletes the specified subscriber.
+3.  Client2Door displays success message and the updated subscriber list.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Startup owner enters an invalid index.
+
+    * 1a1. Client2Door shows invalid index error message.
+
+      Use case ends.
+
+* 1b. Startup owner enters an invalid command format (e.g., parameters issue).
+
+    * 1b1. Client2Door shows an error message indicating the format is invalid.
+
+      Use case ends.
+
+---
+
+**Use case: UC03 — List subscribers**
+
+**MSS**
+
+1.  Startup owner requests to list all active subscribers.
+2.  Client2Door displays all subscribers and all stored details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Startup owner enters an invalid command word (e.g., typo, misspelling).
+
+    * 1a1. Client2Door shows an error message indicating the command is invalid.
+
+      Use case ends.
+
+* 1b. Startup owner enters an invalid command format (e.g., parameters issue).
+
+    * 1b1. Client2Door shows an error message indicating the format is invalid.
+
+      Use case ends.
+
+* 2a. The subscriber list is empty.
+
+   * 2a1. Client2Door displays no subscribers
+        
+     Use case ends.
 
 ### Non-Functional Requirements
 
