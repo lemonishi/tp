@@ -69,7 +69,8 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_FRIEND,
+                new AddCommand(expectedPerson));
 
 
         // multiple tags - all accepted
@@ -224,11 +225,13 @@ public class AddCommandParserTest {
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+                + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+                + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                Address.MESSAGE_CONSTRAINTS);
 
         // invalid order description
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
@@ -237,8 +240,8 @@ public class AddCommandParserTest {
 
         // invalid delivery status
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + ORDER_DESCRIPTION_DESC_BOB + INVALID_DELIVERY_STATUS_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                DeliveryStatus.MESSAGE_CONSTRAINTS);
+                + ORDER_DESCRIPTION_DESC_BOB + INVALID_DELIVERY_STATUS_DESC + TAG_DESC_HUSBAND
+                + TAG_DESC_FRIEND, DeliveryStatus.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
