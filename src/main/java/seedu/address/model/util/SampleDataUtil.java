@@ -10,6 +10,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.DeliveryStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Box;
 import seedu.address.model.person.OrderDescription;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -23,31 +24,37 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
+                getBoxSet("box 1"),
                 new OrderDescription("2 iced coffees"),
                 new DeliveryStatus("delivered"),
                 getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                getBoxSet("box 1", "box 2"),
                 new OrderDescription("3 cupcakes"),
                 new DeliveryStatus("pending"),
                 getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                getBoxSet("box 3"),
                 new OrderDescription("1 vanilla cake"),
                 new DeliveryStatus("preparing"),
                 getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                getBoxSet("box 4"),
                 new OrderDescription("4 chicken pies"),
                 new DeliveryStatus("out-for-delivery"),
                 getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
+                getBoxSet("box 5"),
                 new OrderDescription("2 baguettes"),
                 new DeliveryStatus("delivered"),
                 getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
+                getBoxSet("box 6"),
                 new OrderDescription("6 donuts"),
                 new DeliveryStatus("pending"),
                 getTagSet("colleagues"))
@@ -60,6 +67,15 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
+    }
+
+    /**
+     * Returns a box set containing the list of strings given.
+     */
+    public static Set<Box> getBoxSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Box::new)
+                .collect(Collectors.toSet());
     }
 
     /**

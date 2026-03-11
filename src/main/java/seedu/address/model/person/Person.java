@@ -26,19 +26,19 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Package> packages = new HashSet<>();
+    private final Set<Box> boxes = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Set<Package> packages, OrderDescription orderDescription, DeliveryStatus deliveryStatus, Set<Tag> tags) {
+                  Set<Box> boxes, OrderDescription orderDescription, DeliveryStatus deliveryStatus, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, orderDescription, deliveryStatus, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.packages.addAll(packages);
+        this.boxes.addAll(boxes);
         this.orderDescription = orderDescription;
         this.deliveryStatus = deliveryStatus;
         this.tags.addAll(tags);
@@ -58,6 +58,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    /**
+     * Returns an immutable box set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Box> getBoxes() {
+        return Collections.unmodifiableSet(boxes);
     }
 
     public OrderDescription getOrderDescription() {
@@ -109,7 +117,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && packages.equals(otherPerson.packages)
+                && boxes.equals(otherPerson.boxes)
                 && orderDescription.equals(otherPerson.orderDescription)
                 && deliveryStatus.equals(otherPerson.deliveryStatus)
                 && tags.equals(otherPerson.tags);
@@ -118,7 +126,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, orderDescription, deliveryStatus, tags);
+        return Objects.hash(name, phone, email, address, boxes, orderDescription, deliveryStatus, tags);
     }
 
     @Override
@@ -128,7 +136,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("packages", packages)
+                .add("boxes", boxes)
                 .add("orderDescription", orderDescription)
                 .add("deliveryStatus", deliveryStatus)
                 .add("tags", tags)
