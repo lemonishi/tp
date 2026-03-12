@@ -31,7 +31,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedBox> boxes = new ArrayList<>();
+    private final List<JsonAdaptedBox> boxes;
     private final String orderDescription;
     private final String deliveryStatus;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -44,7 +44,8 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("orderDescription") String orderDescription,
             @JsonProperty("deliveryStatus") String deliveryStatus,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("boxes") List<JsonAdaptedBox> boxes) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -54,6 +55,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.boxes = boxes;
     }
 
     /**
@@ -69,6 +71,9 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        boxes = source.getBoxes().stream()
+                .map(JsonAdaptedBox::new)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -78,12 +83,8 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
-        final List<Box> personBoxes = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
-        }
-        for (JsonAdaptedBox box : boxes) {
-            personBoxes.add(box.toModelType());
         }
 
         if (name == null) {
@@ -135,6 +136,15 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(DeliveryStatus.MESSAGE_CONSTRAINTS);
         }
         final DeliveryStatus modelDeliveryStatus = new DeliveryStatus(deliveryStatus);
+
+        if (boxes == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Box.class.getSimpleName()));
+        }
+
+        final List<Box> personBoxes = new ArrayList<>();
+        for (JsonAdaptedBox box : boxes) {
+            personBoxes.add(box.toModelType());
+        }
 
         final Set<Box> modelBoxes = new HashSet<>(personBoxes);
         final Set<Tag> modelTags = new HashSet<>(personTags);

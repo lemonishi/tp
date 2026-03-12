@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Box {
 
     public static final String MESSAGE_CONTRAINTS = "Box names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String boxName;
 
@@ -56,5 +56,4 @@ public class Box {
     public String toString() {
         return '[' + boxName + ']';
     }
-
 }
