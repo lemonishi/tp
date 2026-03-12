@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Box {
 
-    public static final String MESSAGE_CONTRAINTS = "Box names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Box names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String boxName;
@@ -20,7 +20,7 @@ public class Box {
      */
     public Box(String boxName) {
         requireNonNull(boxName);
-        checkArgument(isValidBoxName(boxName), MESSAGE_CONTRAINTS);
+        checkArgument(isValidBoxName(boxName), MESSAGE_CONSTRAINTS);
         this.boxName = boxName;
     }
 

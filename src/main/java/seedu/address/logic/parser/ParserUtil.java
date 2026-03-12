@@ -165,7 +165,7 @@ public class ParserUtil {
         requireNonNull(box);
         String trimmedBox = box.trim();
         if (!Box.isValidBoxName(trimmedBox)) {
-            throw new ParseException(Box.MESSAGE_CONTRAINTS);
+            throw new ParseException(Box.MESSAGE_CONSTRAINTS);
         }
         return new Box(trimmedBox);
     }

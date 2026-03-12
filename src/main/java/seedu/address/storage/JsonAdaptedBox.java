@@ -40,7 +40,7 @@ public class JsonAdaptedBox {
      */
     public Box toModelType() throws IllegalValueException {
         if (!Box.isValidBoxName(boxName)) {
-            throw new IllegalValueException(Box.MESSAGE_CONTRAINTS);
+            throw new IllegalValueException(Box.MESSAGE_CONSTRAINTS);
         }
         return new Box(boxName);
     }

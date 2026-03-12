@@ -3,11 +3,14 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.BOX_DESC_BOX1;
+import static seedu.address.logic.commands.CommandTestUtil.BOX_DESC_BOX2;
 import static seedu.address.logic.commands.CommandTestUtil.DELIVERY_STATUS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DELIVERY_STATUS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_BOX_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_STATUS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -25,6 +28,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOX_BOX1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BOX_BOX2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_STATUS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -49,6 +54,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Box;
 import seedu.address.model.person.DeliveryStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -65,11 +71,13 @@ public class AddCommandParserTest {
     public void parse_allFieldsPresent_success() {
         Person expectedPerson = new PersonBuilder(BOB).withOrderDescription(VALID_ORDER_DESCRIPTION_BOB)
                 .withDeliveryStatus(VALID_DELIVERY_STATUS_BOB)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND)
+                .withBoxes(VALID_BOX_BOX1).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_FRIEND,
+                + ADDRESS_DESC_BOB + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_FRIEND
+                + BOX_DESC_BOX1,
                 new AddCommand(expectedPerson));
 
 
@@ -77,17 +85,19 @@ public class AddCommandParserTest {
         Person expectedPersonMultipleTags = new PersonBuilder(BOB)
                 .withOrderDescription(VALID_ORDER_DESCRIPTION_BOB)
                 .withDeliveryStatus(VALID_DELIVERY_STATUS_BOB)
-                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+                .withBoxes(VALID_BOX_BOX1, VALID_BOX_BOX2).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + ORDER_DESCRIPTION_DESC_BOB
-                        + DELIVERY_STATUS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
+                        + DELIVERY_STATUS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + BOX_DESC_BOX1 + BOX_DESC_BOX2,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_FRIEND;
+                + ADDRESS_DESC_BOB + BOX_DESC_BOX1 + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB
+                + TAG_DESC_FRIEND;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -171,9 +181,10 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withOrderDescription(VALID_ORDER_DESCRIPTION_AMY).withTags()
+                .withBoxes(VALID_BOX_BOX1)
                 .build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + ORDER_DESCRIPTION_DESC_AMY + DELIVERY_STATUS_DESC_AMY,
+                        + BOX_DESC_BOX1 + ORDER_DESCRIPTION_DESC_AMY + DELIVERY_STATUS_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
 
@@ -215,47 +226,58 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                + BOX_DESC_BOX1,
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                + BOX_DESC_BOX1,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                + BOX_DESC_BOX1,
                 Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                + BOX_DESC_BOX1,
                 Address.MESSAGE_CONSTRAINTS);
 
         // invalid order description
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_ORDER_DESCRIPTION_DESC + DELIVERY_STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + INVALID_ORDER_DESCRIPTION_DESC + DELIVERY_STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                + BOX_DESC_BOX1,
                 OrderDescription.MESSAGE_CONSTRAINTS);
 
         // invalid delivery status
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + ORDER_DESCRIPTION_DESC_BOB + INVALID_DELIVERY_STATUS_DESC + TAG_DESC_HUSBAND
-                + TAG_DESC_FRIEND, DeliveryStatus.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_FRIEND + BOX_DESC_BOX1, DeliveryStatus.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + INVALID_TAG_DESC + VALID_TAG_FRIEND + BOX_DESC_BOX1, Tag.MESSAGE_CONSTRAINTS);
+
+        // invalid box
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB
+                + INVALID_TAG_DESC + VALID_TAG_FRIEND + INVALID_BOX_DESC, Box.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                        + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB,
+                        + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + BOX_DESC_BOX1,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_FRIEND,
+                + ADDRESS_DESC_BOB + ORDER_DESCRIPTION_DESC_BOB + DELIVERY_STATUS_DESC_BOB + TAG_DESC_FRIEND
+                + BOX_DESC_BOX1,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

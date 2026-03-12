@@ -6,13 +6,15 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "orderDescription": "1 cake",
     "deliveryStatus": "pending",
-    "tags": [ "friends" ]
+    "tags": [ "friends" ],
+    "boxes": [ "Box1" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
     "orderDescription": "1 cake",
-    "deliveryStatus": "pending"
+    "deliveryStatus": "pending",
+    "boxes": [ "Box1" ]
   } ]
 }

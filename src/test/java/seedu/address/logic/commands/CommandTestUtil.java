@@ -64,8 +64,8 @@ public class CommandTestUtil {
             " " + PREFIX_DELIVERY_STATUS + VALID_DELIVERY_STATUS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String BOX_DESC_BOX1 = " " + PREFIX_TAG + VALID_BOX_BOX1;
-    public static final String BOX_DESC_BOX2 = " " + PREFIX_TAG + VALID_BOX_BOX2;
+    public static final String BOX_DESC_BOX1 = " " + PREFIX_BOX + VALID_BOX_BOX1;
+    public static final String BOX_DESC_BOX2 = " " + PREFIX_BOX + VALID_BOX_BOX2;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

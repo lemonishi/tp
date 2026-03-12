@@ -74,7 +74,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", orderDescription="
+                + editPersonDescriptor.getAddress().orElse(null) + ", boxes="
+                + editPersonDescriptor.getBoxes().orElse(null) + ", orderDescription="
                 + editPersonDescriptor.getOrderDescription().orElse(null) + ", deliveryStatus="
                 + editPersonDescriptor.getDeliveryStatus().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";

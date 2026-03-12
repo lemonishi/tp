@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Box;
 import seedu.address.model.person.DeliveryStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -41,6 +42,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setOrderDescription(person.getOrderDescription());
         descriptor.setDeliveryStatus(person.getDeliveryStatus());
         descriptor.setTags(person.getTags());
+        descriptor.setBoxes(person.getBoxes());
     }
 
     /**
@@ -98,6 +100,16 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withBoxes(String... boxes) {
+        Set<Box> boxSet = Stream.of(boxes).map(Box::new).collect(Collectors.toSet());
+        descriptor.setBoxes(boxSet);
         return this;
     }
 

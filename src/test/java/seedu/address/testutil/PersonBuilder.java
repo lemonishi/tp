@@ -46,7 +46,7 @@ public class PersonBuilder {
         orderDescription = new OrderDescription(DEFAULT_ORDER_DESCRIPTION);
         deliveryStatus = new DeliveryStatus(DEFAULT_DELIVERY_STATUS);
         tags = new HashSet<>();
-        boxes = new HashSet<>();
+        boxes = SampleDataUtil.getBoxSet("Box1");
     }
 
     /**
