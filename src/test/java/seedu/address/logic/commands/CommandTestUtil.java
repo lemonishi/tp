@@ -2,13 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -42,6 +36,8 @@ public class CommandTestUtil {
     public static final String VALID_DELIVERY_STATUS_BOB = "delivered";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_BOX_BOX1 = "Box1";
+    public static final String VALID_BOX_BOX2 = "Box2";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -61,6 +57,8 @@ public class CommandTestUtil {
             " " + PREFIX_DELIVERY_STATUS + VALID_DELIVERY_STATUS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String BOX_DESC_BOX1 = " " + PREFIX_TAG + VALID_BOX_BOX1;
+    public static final String BOX_DESC_BOX2 = " " + PREFIX_TAG + VALID_BOX_BOX2;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -69,6 +67,7 @@ public class CommandTestUtil {
     public static final String INVALID_ORDER_DESCRIPTION_DESC = " " + PREFIX_ORDER_DESCRIPTION + "#cake";
     public static final String INVALID_DELIVERY_STATUS_DESC = " " + PREFIX_DELIVERY_STATUS + "maybe";
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_BOX_DESC = " " + PREFIX_BOX + "box*"; // '*' not allowed in boxes
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

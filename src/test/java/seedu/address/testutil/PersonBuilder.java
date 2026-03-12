@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Box;
 import seedu.address.model.person.DeliveryStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -32,6 +33,7 @@ public class PersonBuilder {
     private OrderDescription orderDescription;
     private DeliveryStatus deliveryStatus;
     private Set<Tag> tags;
+    private Set<Box> boxes;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -44,6 +46,7 @@ public class PersonBuilder {
         orderDescription = new OrderDescription(DEFAULT_ORDER_DESCRIPTION);
         deliveryStatus = new DeliveryStatus(DEFAULT_DELIVERY_STATUS);
         tags = new HashSet<>();
+        boxes = new HashSet<>();
     }
 
     /**
@@ -57,6 +60,7 @@ public class PersonBuilder {
         orderDescription = personToCopy.getOrderDescription();
         deliveryStatus = personToCopy.getDeliveryStatus();
         tags = new HashSet<>(personToCopy.getTags());
+        boxes = new HashSet<>(personToCopy.getBoxes());
     }
 
     /**
@@ -72,6 +76,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code boxes} into a {@code Set<Box>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withBoxes(String ... boxes) {
+        this.boxes = SampleDataUtil.getBoxSet(boxes);
         return this;
     }
 
@@ -116,7 +128,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, orderDescription, deliveryStatus, tags);
+        return new Person(name, phone, email, address, boxes, orderDescription, deliveryStatus, tags);
     }
 
 }
