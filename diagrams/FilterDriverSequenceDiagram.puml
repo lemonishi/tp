@@ -13,6 +13,8 @@ end box
 
 box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
+participant "p:Person" as Person MODEL_COLOR
+participant "dr:Driver" as Driver MODEL_COLOR
 end box
 
 [-> LogicManager : execute("filter d/Alex d/Jordan")
@@ -59,6 +61,40 @@ activate FilterCommand
 
 FilterCommand -> Model : updateFilteredPersonList(d)
 activate Model
+
+loop for each person in the list
+    Model -> DriverAssignedToPersonPredicate : test(p)
+    activate DriverAssignedToPersonPredicate
+
+    alt person has an assigned driver
+        DriverAssignedToPersonPredicate -> Person : getAssignedDriver()
+        activate Person
+
+        Person -> Driver : new Driver(name, phone)
+        activate Driver
+
+        Driver --> Person : dr
+        deactivate Driver
+
+        Person --> DriverAssignedToPersonPredicate : dr
+        deactivate Person
+
+        DriverAssignedToPersonPredicate -> Driver : getName()
+        activate Driver
+
+        Driver --> DriverAssignedToPersonPredicate : name
+        deactivate Driver
+    else person has no assigned driver
+        DriverAssignedToPersonPredicate -> Person : getAssignedDriver()
+        activate Person
+
+        Person --> DriverAssignedToPersonPredicate : DriverNotFoundException
+        deactivate Person
+    end
+
+    DriverAssignedToPersonPredicate --> Model : matches / false
+    deactivate DriverAssignedToPersonPredicate
+end
 
 Model --> FilterCommand
 deactivate Model
