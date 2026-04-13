@@ -41,7 +41,6 @@
       "title": "Developer Guide",
       "headings": {
         "client2door-developer-guide": "Client2Door Developer Guide",
-        "acknowledgements": "Acknowledgements",
         "setting-up-getting-started": "Setting up, getting started",
         "design": "Design",
         "architecture": "Architecture",
@@ -51,9 +50,11 @@
         "storage-component": "Storage component",
         "common-classes": "Common classes",
         "implementation": "Implementation",
-        "assign-drivers-feature": "Assign Drivers feature",
+        "assign-drivers-feature": "Assign drivers feature",
+        "delete-box-feature": "Delete box feature",
+        "filter-feature": "Filter feature",
+        "export-feature": "Export feature",
         "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
-        "proposed-data-archiving": "[Proposed] Data archiving",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",
@@ -63,8 +64,22 @@
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
-        "deleting-a-person": "Deleting a person",
-        "saving-data": "Saving data"
+        "adding-a-subscriber": "Adding a subscriber",
+        "editing-a-subscriber": "Editing a subscriber",
+        "deleting-a-subscriber": "Deleting a subscriber",
+        "updating-a-subscriber-s-remark": "Updating a subscriber's remark",
+        "adding-boxes-to-a-subscriber": "Adding boxes to a subscriber",
+        "editing-a-box": "Editing a box",
+        "deleting-boxes-from-a-subscriber": "Deleting boxes from a subscriber",
+        "finding-subscribers": "Finding subscribers",
+        "assigning-drivers": "Assigning drivers",
+        "marking-delivery-status": "Marking delivery status",
+        "filtering-subscribers": "Filtering subscribers",
+        "importing-subscribers": "Importing subscribers",
+        "clearing-all-subscribers": "Clearing all subscribers",
+        "exporting-delivery-assignments": "Exporting delivery assignments",
+        "saving-data": "Saving data",
+        "example-format-of-the-data-file": "Example format of the data file"
       },
       "headingKeywords": {}
     },
@@ -119,6 +134,7 @@
         "key-concepts": "Key Concepts",
         "features": "Features",
         "notes-about-the-command-format": "Notes about the command format:",
+        "parameter-reference": "Parameter reference:",
         "viewing-help-help": "Viewing help : help",
         "adding-a-subscriber-add": "Adding a subscriber : add",
         "listing-all-subscribers-list": "Listing all subscribers : list",
@@ -150,6 +166,7 @@
     },
     {
       "src": "index.md",
+      "title": "",
       "headings": {
         "client2door": "Client2Door"
       },

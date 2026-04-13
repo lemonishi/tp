@@ -46,8 +46,12 @@ destroy AssignCommandParser
 AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
 
-LogicManager -> AssignCommand : execute()
+LogicManager -> AssignCommand : execute(model)
 activate AssignCommand
+
+ref over AssignCommand, Model
+    assign drivers to all subscribers
+end ref
 
 AssignCommand -> Model : updateFilteredPersonList(...)
 activate Model
@@ -55,12 +59,8 @@ activate Model
 Model --> AssignCommand
 deactivate Model
 
-ref over AssignCommand, Model
-    assign drivers to all subscribers
-
-end ref
-
 create CommandResult
+
 AssignCommand -> CommandResult
 activate CommandResult
 

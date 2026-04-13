@@ -1,0 +1,37 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+if () then ([no file name provided])
+    :Use default file name;
+else ([file name provided])
+    :Validate file name;
+    if () then ([invalid file name or type])
+        :Show error message;
+        stop
+    else ([valid])
+    endif
+endif
+
+:Check all subscribers have assigned drivers;
+
+if () then ([unassigned subscriber found])
+    :Show error message;
+    stop
+else ([all assigned])
+endif
+
+:Generate HTML file;
+
+if () then ([file write fails])
+    :Show error message;
+    stop
+else ([success])
+endif
+
+:Show success message with file path;
+stop
+@enduml

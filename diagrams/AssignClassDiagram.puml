@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model as ModelPackage <<Rectangle>>{
+Class AssignCommand LOGIC_COLOR
+Class ClusterAssigner #EE82EE
+Class GeographicalComparator #EE82EE
+Class DistrictMapper #EE82EE
+Class DistrictRanker #EE82EE
+Class Person MODEL_COLOR
+}
+
+AssignCommand ..> ClusterAssigner : <<use>>
+ClusterAssigner ..> GeographicalComparator : <<use>>
+GeographicalComparator ..> DistrictMapper : <<use>>
+GeographicalComparator ..> DistrictRanker : <<use>>
+ClusterAssigner ..> Person : <<group>>
+@enduml

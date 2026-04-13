@@ -1,0 +1,34 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:Find subscriber by name;
+
+if () then ([subscriber not found])
+    :Show error message;
+    stop
+else ([subscriber found])
+endif
+
+:Validate box names;
+
+if () then ([box not found])
+    :Show error message;
+    stop
+else ([all boxes exist])
+endif
+
+:Remove specified boxes;
+
+if () then ([subscriber has no remaining boxes])
+    :Delete subscriber;
+    :Clear driver assignments;
+else ([subscriber has remaining box(es)])
+    :Update subscriber with remaining boxes;
+endif
+
+:Update filtered person list;
+stop
+@enduml

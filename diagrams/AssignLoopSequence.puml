@@ -8,27 +8,25 @@ box Logic LOGIC_COLOR_T1
 participant "a:AssignCommand" as AssignCommand LOGIC_COLOR
 end box
 
-participant "<<class>>\nClusterUtil" as ClusterUtil #EE82EE
+participant "<<class>>\nClusterAssigner" as ClusterAssigner #EE82EE
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
 group sd assign drivers to all subscribers
-    AssignCommand -> ClusterUtil : groupIntoClusters(...)
-    activate ClusterUtil
+    AssignCommand -> ClusterAssigner : groupIntoClusters(...)
+    activate ClusterAssigner
 
-    ClusterUtil -> AssignCommand : clusters of subscribers
-    deactivate ClusterUtil
+    ClusterAssigner --> AssignCommand : clusters of subscribers
+    deactivate ClusterAssigner
 
-    loop for each cluster
-        loop for each subscriber in cluster
-            AssignCommand -> Model : setPerson(...)
-            activate Model
+    loop for each subscriber in each cluster
+        AssignCommand -> Model : setPerson(...)
+        activate Model
 
-            Model --> AssignCommand
-            deactivate Model
-        end
+        Model --> AssignCommand
+        deactivate Model
     end
 end
 

@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+hide footbox
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteBoxCommandParser" as DeleteBoxCommandParser LOGIC_COLOR
+participant "d:DeleteBoxCommand" as DeleteBoxCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(deleteBox...)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(deleteBox...)
+activate AddressBookParser
+
+create DeleteBoxCommandParser
+AddressBookParser -> DeleteBoxCommandParser
+activate DeleteBoxCommandParser
+DeleteBoxCommandParser --> AddressBookParser
+deactivate DeleteBoxCommandParser
+
+AddressBookParser -> DeleteBoxCommandParser : parse(...)
+activate DeleteBoxCommandParser
+
+create DeleteBoxCommand
+DeleteBoxCommandParser -> DeleteBoxCommand
+activate DeleteBoxCommand
+DeleteBoxCommand --> DeleteBoxCommandParser
+deactivate DeleteBoxCommand
+
+DeleteBoxCommandParser --> AddressBookParser : d
+deactivate DeleteBoxCommandParser
+DeleteBoxCommandParser -[hidden]-> AddressBookParser
+destroy DeleteBoxCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeleteBoxCommand : execute(model)
+activate DeleteBoxCommand
+
+alt updatedBoxes is empty
+    DeleteBoxCommand -> Model : deletePerson(...)
+    activate Model
+    Model --> DeleteBoxCommand
+    deactivate Model
+else updatedBoxes not empty
+    DeleteBoxCommand -> Model : setPerson(...)
+    activate Model
+    Model --> DeleteBoxCommand
+    deactivate Model
+end
+
+DeleteBoxCommand -> Model : updateFilteredPersonList(...)
+activate Model
+Model --> DeleteBoxCommand
+deactivate Model
+
+create CommandResult
+DeleteBoxCommand -> CommandResult
+activate CommandResult
+CommandResult --> DeleteBoxCommand
+deactivate CommandResult
+
+DeleteBoxCommand --> LogicManager : r
+deactivate DeleteBoxCommand
+DeleteBoxCommand -[hidden]-> LogicManager
+destroy DeleteBoxCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml
